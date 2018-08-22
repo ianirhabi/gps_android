@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".main.Welcome">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:focusable="true"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="48dp"
+        tools:layout_editor_absoluteY="110dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Selamat akun anda telah berhasil di daftarkan hubungi admin untuk mengaktifkan akun anda"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/nam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="nama"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/user"
+            android:text="username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/passs"
+            android:text="password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp" />
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:id="@+id/call"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@android:drawable/ic_menu_call"
+            android:hint="Hubungi admin" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="atau"
+            android:textSize="15dp" />
+        <Button
+            android:id="@+id/keluar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Logout" />
+        <ImageView
+            android:id="@+id/image_logo"
+            android:layout_width="127dp"
+            android:layout_height="127dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/back"/>
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

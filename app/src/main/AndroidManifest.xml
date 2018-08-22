@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.irhabi_ecsboard.sendbird">
+
+    <uses-sdk tools:overrideLibrary="com.stfalcon.multiimageview" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <!-- min 16 -->
+    <application
+        android:name=".main.BaseApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".main.LoginActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".main.MainActivity"
+            android:label="@string/select_channel_type"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.SettingsActivity"
+            android:label="@string/settings"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.BlockedMembersListActivity"
+            android:label="@string/blocked_members_list"
+            android:screenOrientation="portrait" />
+        <activity android:name=".utils.PhotoViewerActivity" />
+        <activity
+            android:name=".utils.MediaPlayerActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".openchannel.CreateOpenChannelActivity"
+            android:label="@string/create_open_channel"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name=".groupchannel.InviteMemberActivity"
+            android:label="@string/invite_member"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".groupchannel.MemberListActivity"
+            android:label="@string/member_list"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".groupchannel.MemberInfoActivity"
+            android:label="@string/member_info"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".groupchannel.CreateGroupChannelActivity"
+            android:label="@string/create_group_channel"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".openchannel.ParticipantListActivity"
+            android:label="@string/participant_list"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".openchannel.OpenChannelActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".groupchannel.GroupChannelActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <service android:name=".fcm.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".fcm.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name=".main.Register"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.Authnumber"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.Welcome"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".admin.Admin"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".anggota.AnggotaActivity"
+            android:label="@string/title_activity_anggota"
+            android:theme="@style/AppTheme"></activity>
+    </application>
+
+</manifest>
