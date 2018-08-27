@@ -196,7 +196,6 @@ public class Authnumber extends AppCompatActivity {
             return;
         }
 
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             List<SubscriptionInfo> subscription = SubscriptionManager.from(getApplicationContext()).getActiveSubscriptionInfoList();
             for (int i = 0; i < subscription.size(); i++) {
@@ -206,6 +205,7 @@ public class Authnumber extends AppCompatActivity {
                 Log.d("debug", "country iso " + info.getCountryIso());
             }
         }
+
         String IMEInumber = manager.getDeviceId();
         String numberphone = manager.getLine1Number();
         Log.d("debug " ,"imeinya " + IMEInumber +" operator " + numberphone);
@@ -215,6 +215,7 @@ public class Authnumber extends AppCompatActivity {
     private void displayFirebaseRegId(String imei, String name, String username, String password) {
         SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
         String token = pref.getString("regId", null);
+        Log.d("debug", " TOKEN FIREBASE ID ==== " + token);
         Regis(name, username, password, imei, token);
         Log.e("debug", "Firebase reg id di auth number: " + token);
     }
@@ -232,7 +233,7 @@ public class Authnumber extends AppCompatActivity {
         retrofit = new RetrofitInstance();
         Log.d("masuk sini", "");
         Router service = retrofit.getRetrofitInstanceall().create(Router.class);
-        Call<User> call = service.Postregis(user, imei);
+        Call<User> call = service.Postregis(user, imei,"pending");
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, retrofit2.Response<User> response) {

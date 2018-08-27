@@ -30,7 +30,7 @@ public class User {
     @SerializedName("usergrup")
     String ug;
 
-    public User(String name, String username, String password, String tanggal, String time, String imei, String token, String lont, String lat){
+    public User(String name, String username, String password, String tanggal, String time, String token, String imei, String lont, String lat){
         this.name = name;
         this.username = username;
         this.password = password;
@@ -72,4 +72,8 @@ public class User {
     public String getName() {
         return name;
     }
+    public String getImei() {
+        return imei;
+    }
+
 }

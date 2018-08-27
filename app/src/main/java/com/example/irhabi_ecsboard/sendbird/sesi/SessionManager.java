@@ -42,6 +42,7 @@ public class SessionManager {
     public static final String KEY_USERNAME = "nama";
     public static final String KEY_NAME = "id";
     public  static  final String KEY_PASSWORD = "grup";
+    public  static  final String KEY_STATUS = "status";
 
     // public Constructor
     public SessionManager(Context context){
@@ -63,6 +64,11 @@ public class SessionManager {
         editor.commit();
     }
 
+    public void createStatus(String status){
+        editor.putBoolean(IS_LOGIN, true);
+        editor.putString(KEY_STATUS, status);
+        editor.commit();
+    }
 
 
     /**
@@ -73,6 +79,7 @@ public class SessionManager {
         user.put(KEY_NAME, pref.getString(KEY_NAME,null));
         user.put(KEY_USERNAME, pref.getString(KEY_USERNAME, null));
         user.put(KEY_PASSWORD, pref.getString(KEY_PASSWORD, null));
+        user.put(KEY_STATUS,pref.getString(KEY_STATUS,null));
         return user;
     }
 

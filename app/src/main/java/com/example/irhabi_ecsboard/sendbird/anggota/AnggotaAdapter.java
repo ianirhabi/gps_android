@@ -10,7 +10,6 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.example.irhabi_ecsboard.sendbird.R;
-import com.example.irhabi_ecsboard.sendbird.model.Anggota;
 import com.example.irhabi_ecsboard.sendbird.model.User;
 
 import java.util.ArrayList;
@@ -37,7 +36,6 @@ public class AnggotaAdapter extends  RecyclerView.Adapter<AnggotaAdapter.MyViewH
                 .inflate(R.layout.activity_anggota_view, parent, false);
 
         return new MyViewHolder(itemView);
-
     }
 
     @Override
@@ -45,6 +43,14 @@ public class AnggotaAdapter extends  RecyclerView.Adapter<AnggotaAdapter.MyViewH
         final User data = anggotaFiltered.get(position);
         data.getId();
         holder.nama.setText(data.getName());
+        holder.phone.setText(data.getUsername());
+        if (data.getStatus().equals("aktif")){
+            holder.aktif.setVisibility(View.VISIBLE);
+            holder.aktif.setText(data.getStatus());
+        } else if (data.getStatus().equals("pending")){
+            holder.pending.setVisibility(View.VISIBLE);
+            holder.pending.setText(data.getStatus());
+        }
     }
 
     @Override
@@ -92,12 +98,15 @@ public class AnggotaAdapter extends  RecyclerView.Adapter<AnggotaAdapter.MyViewH
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView nama;
+        private TextView nama, phone, aktif, pending;
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
             nama = itemView.findViewById(R.id.name);
+            phone = itemView.findViewById(R.id.phonenumber);
+            aktif = itemView.findViewById(R.id.statusaktif);
+            pending = itemView.findViewById(R.id.nonaktif);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

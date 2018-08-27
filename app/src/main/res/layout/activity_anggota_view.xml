@@ -15,25 +15,26 @@
         android:layout_width="@dimen/thumbnail"
         android:layout_height="@dimen/thumbnail"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/row_padding" />
+        android:layout_marginRight="@dimen/row_padding"
+        android:background="@drawable/circle"
+        android:src="@drawable/profile_thumbnail"/>
 
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/thumbnail"
-        android:fontFamily="sans-serif-medium"
+        android:fontFamily="sans-serif-light"
         android:textColor="@color/hitam"
         android:textSize="18dp" />
 
-    <!--<TextView-->
-        <!--android:id="@+id/statusbayar"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/name"-->
-        <!--android:layout_toRightOf="@id/thumbnail"-->
-        <!--android:textColor="@color/description"-->
-        <!--android:textSize="@dimen/barang_number" />-->
+    <TextView
+        android:id="@+id/phonenumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:fontFamily="sans-serif-light"
+        android:layout_toRightOf="@id/thumbnail"/>
     <!--<TextView-->
         <!--android:id="@+id/created"-->
         <!--android:layout_width="wrap_content"-->
@@ -43,5 +44,31 @@
         <!--android:layout_toRightOf="@id/thumbnail"-->
         <!--android:textColor="@color/description"-->
         <!--android:textSize="18dp" />-->
+
+    <TextView
+        android:visibility="gone"
+        android:fontFamily="sans-serif-light"
+        android:id="@+id/statusaktif"
+        android:text="aktif"
+        android:textColor="@color/white"
+        android:background="@drawable/aktif"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/phonenumber"
+        android:layout_toRightOf="@id/thumbnail"/>
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/nonaktif"
+        android:text="nonaktif"
+        android:layout_marginTop="30dp"
+        android:fontFamily="sans-serif-light"
+        android:textColor="@color/white"
+        android:background="@drawable/aktifnon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/phonenumber"
+        android:layout_toRightOf="@id/thumbnail"/>
 
 </RelativeLayout>

@@ -1,8 +1,11 @@
 package com.example.irhabi_ecsboard.sendbird.anggota;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,19 +16,27 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.irhabi_ecsboard.sendbird.R;
 import com.example.irhabi_ecsboard.sendbird.admin.Admin;
+import com.example.irhabi_ecsboard.sendbird.detailiuran.IuranDetail;
 import com.example.irhabi_ecsboard.sendbird.dialog.Inputiuran;
+import com.example.irhabi_ecsboard.sendbird.main.LoginActivity;
+import com.example.irhabi_ecsboard.sendbird.main.MainActivity;
 import com.example.irhabi_ecsboard.sendbird.model.Anggota;
 import com.example.irhabi_ecsboard.sendbird.model.User;
 import com.example.irhabi_ecsboard.sendbird.service.RetrofitInstance;
 import com.example.irhabi_ecsboard.sendbird.service.Router;
+import com.example.irhabi_ecsboard.sendbird.sesi.SessionManager;
+import com.example.irhabi_ecsboard.sendbird.utils.PreferenceUtils;
 
 import java.util.ArrayList;
 
@@ -41,10 +52,17 @@ public class AnggotaActivity extends AppCompatActivity implements AnggotaAdapter
     private Router router;
     private RecyclerView recyclerView;
     private Inputiuran iurandialog;
+    private SessionManager sesi;
+    private String status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        // set an exit transition
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setExitTransition(new Explode());
+        }
         setContentView(R.layout.activity_anggota);
         setFloatingButton();
         getAnggota();
@@ -62,15 +80,31 @@ public class AnggotaActivity extends AppCompatActivity implements AnggotaAdapter
                         .setAction("Action", null).show();
             }
         });
+        final String status = PreferenceUtils.getUserGrup(this);
+        this.status = status;
+        if (status.equals("4")) {
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(AnggotaActivity.this, Admin.class);
-                startActivity(i);
-                finish();
-            }
-        });
+                    Intent i = new Intent(AnggotaActivity.this, MainActivity.class);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        startActivity(i, ActivityOptions.makeSceneTransitionAnimation(AnggotaActivity.this).toBundle());
+                    }
+                }
+            });
+        }else {
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent i = new Intent(AnggotaActivity.this, Admin.class);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        startActivity(i, ActivityOptions.makeSceneTransitionAnimation(AnggotaActivity.this).toBundle());
+                    }
+                }
+            });
+        }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Anggota Gps");
     }
@@ -117,11 +151,33 @@ public class AnggotaActivity extends AppCompatActivity implements AnggotaAdapter
      * ketika barang di klik
      * @param user
      */
+
     @Override
     public void onAnggotaSelected(User user){
-        iurandialog = new Inputiuran();
-        iurandialog.showInput(AnggotaActivity.this, "",AnggotaActivity.this,user.getId());
-        Toast.makeText(getApplicationContext(),"Anda id" + user.getId(), Toast.LENGTH_LONG).show();
+
+        if(status.equals("4")){
+
+            Intent i = new Intent(AnggotaActivity.this, IuranDetail.class);
+            Bundle ambildata = new Bundle();
+            ambildata.putInt("id", user.getId());
+            ambildata.putString("anggota", user.getUsername());
+            ambildata.putString("nomor", user.getName());
+            i.putExtras(ambildata);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                startActivity(i, ActivityOptions.makeSceneTransitionAnimation(AnggotaActivity.this).toBundle());
+            }
+
+        }else {
+
+            String[] st = {"selesai", "belum selesai"};
+            ArrayAdapter adapter = new ArrayAdapter(this,
+                    android.R.layout.simple_spinner_dropdown_item, st);
+            sesi = new SessionManager(getApplicationContext());
+            sesi.createStatus("1");
+            iurandialog = new Inputiuran();
+            iurandialog.showInput(AnggotaActivity.this, "",
+                    AnggotaActivity.this, user.getId(), user.getName(), adapter, user.getUsername(), user.getImei());
+        }
     }
 
     public void getAnggota(){

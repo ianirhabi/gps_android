@@ -112,7 +112,8 @@
         <activity
             android:name=".anggota.AnggotaActivity"
             android:label="@string/title_activity_anggota"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".detailiuran.IuranDetail"></activity>
     </application>
 
 </manifest>

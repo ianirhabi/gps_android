@@ -8,6 +8,7 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.transition.Explode;
+import android.view.KeyEvent;
 import android.view.Window;
 import com.example.irhabi_ecsboard.sendbird.R;
 import com.example.irhabi_ecsboard.sendbird.anggota.AnggotaActivity;
@@ -68,14 +69,12 @@ public class Admin extends AppCompatActivity  {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     startActivity(ii, ActivityOptions.makeSceneTransitionAnimation(Admin.this).toBundle());
                 }
-                finish();
             }
             if(b.equals("Input Iuran Anggota")){
                 Intent ii = new Intent(Admin.this, AnggotaActivity.class);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     startActivity(ii, ActivityOptions.makeSceneTransitionAnimation(Admin.this).toBundle());
                 }
-                finish();
             }
         }
         @Override
@@ -83,5 +82,15 @@ public class Admin extends AppCompatActivity  {
 
         }
     }
+
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            moveTaskToBack(true);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 
 }

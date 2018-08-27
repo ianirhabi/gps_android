@@ -33,8 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"
-            android:layout_weight="1"
-            android:background="@drawable/back">
+            android:layout_weight="1">
 
 
             <LinearLayout
@@ -87,44 +86,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Group Channels"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="#FF4500"
-                    android:textSize="16sp" />
-
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_weight="0"
-                android:background="#e0e0e0"/>
-
-            <LinearLayout
-                android:id="@+id/linear_layout_open_iuran"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/logoiuran"
-                    android:layout_marginLeft="19.5dp"
-                    android:layout_marginRight="14dp"
-                    android:layout_gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:background="@android:drawable/ic_menu_agenda" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Status Iuran Anda"
                     android:layout_gravity="center_vertical"
                     android:textColor="#FF4500"
                     android:textSize="16sp" />

@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="fill_parent"
+    android:layout_width="wrap_content">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    tools:context=".detailiuran.IuranDetail">
+
+    <RelativeLayout
+        android:id="@+id/rellay1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/grad"
+        android:paddingBottom="20dp">
+
+        <RelativeLayout
+            android:id="@+id/imgUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/circle_border">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_margin="9dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/circle"
+                android:padding="3dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/profile_thumbnail" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgUser"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15sp"
+            android:fontFamily="sans-serif-light"
+            android:text="Loading.."
+            android:textColor="@color/white"
+            android:textSize="32sp" />
+
+
+        <TextView
+            android:id="@+id/tv_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_name"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="sans-serif"
+            android:text="Loading..."
+            android:textAllCaps="true"
+            android:textColor="@color/address"
+            android:textSize="14sp" />
+
+        <!--<ImageView-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_marginTop="15dp"-->
+            <!--android:adjustViewBounds="true"-->
+            <!--android:scaleType="centerInside"-->
+            <!--app:srcCompat="@drawable/balikk"-->
+            <!--android:id="@+id/blk"/>-->
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:visibility="gone"
+            android:id="@+id/statusupdate"
+            app:srcCompat="@drawable/ic_settings" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linlay1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rellay1"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/bulanback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@color/followersBg"
+            android:gravity="center"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Bulan"
+                    android:textColor="@color/white"
+                    android:textSize="25sp" />
+
+                <Spinner
+                    android:id="@+id/bulan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Agustus"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@color/followingBg"
+            android:gravity="center"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:id="@+id/tahunback">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Tahun"
+                    android:textColor="@color/white"
+                    android:textSize="25sp" />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="2018"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:id="@+id/tahun"/>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@color/grey"
+            android:gravity="center"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:id="@+id/update">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:background="@drawable/update"
+                    android:textColor="@color/white"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Refresh"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linlay1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/msatu">
+
+                <TextView
+                    android:id="@+id/satutujuh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tanggal 1 - Tanggal 7"
+                    android:textColor="@color/headings"
+                    android:textSize="13sp"
+                    android:visibility="visible"/>
+
+                <TextView
+                    android:id="@+id/kesatu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Minggu ke -1"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:visibility="visible"/>
+                <TextView
+                    android:id="@+id/pembayaran_msatu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="status selesai"
+                    android:textColor="#000000"
+                    android:background="@drawable/aktif"
+                    android:textSize="18sp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/belums_msatu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="belum selesai"
+                    android:textColor="#ffffff"
+                    android:background="@drawable/aktifnon"
+                    android:textSize="18sp"
+                    android:visibility="gone"/>
+
+                <Button
+                    android:id="@+id/update_bayarsatu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:hint="Input telah bayar"
+                    android:textColorHint="#ffffff"
+                    android:background="@drawable/aktif"
+                    android:textSize="18sp"
+                    android:layout_gravity="right"
+                    android:visibility="gone"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/grey" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+                android:id="@+id/mdua">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tanggal 8 - Tanggal 15"
+                    android:textColor="@color/headings"
+                    android:textSize="13sp"
+                    android:id="@+id/keduatanggal"
+                    android:visibility="visible"/>
+
+                <TextView
+                    android:id="@+id/kedua"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Minggu ke -2"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:visibility="visible"/>
+                <TextView
+                    android:id="@+id/pembayaran_mdua"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="status selesai"
+                    android:textColor="#000000"
+                    android:background="@drawable/aktif"
+                    android:textSize="18sp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/belums_mdua"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="belum selesai"
+                    android:textColor="#ffffff"
+                    android:background="@drawable/aktifnon"
+                    android:textSize="18sp"
+                    android:visibility="gone"/>
+
+                <Button
+                    android:id="@+id/update_bayardua"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:hint="Input telah bayar"
+                    android:textColorHint="#ffffff"
+                    android:background="@drawable/aktif"
+                    android:textSize="18sp"
+                    android:layout_gravity="right"
+                    android:visibility="gone"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/grey" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+                android:id="@+id/mtiga">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tanggal 16 - Tanggal 22"
+                    android:textColor="@color/headings"
+                    android:textSize="13sp"
+                    android:id="@+id/ketigatanggal"
+                    android:visibility="visible"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Minggu ke -3"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:id="@+id/ketiga"
+                    android:visibility="visible"/>
+                <TextView
+                    android:id="@+id/pembayaran_mtiga"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="status selesai"
+                    android:textColor="#000000"
+                    android:background="@drawable/aktif"
+                    android:textSize="18sp"
+                    android:visibility="gone"/>
+                <TextView
+                    android:id="@+id/belums_mtiga"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="belum selesai"
+                    android:textColor="#ffffff"
+                    android:background="@drawable/aktifnon"
+                    android:textSize="18sp"
+                    android:visibility="gone"/>
+
+                <Button
+                    android:id="@+id/update_bayartiga"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:hint="Input telah bayar"
+                    android:textColorHint="#ffffff"
+                    android:background="@drawable/aktif"
+                    android:textSize="18sp"
+                    android:layout_gravity="right"
+                    android:visibility="gone"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/grey" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+                android:id="@+id/mempat">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tanggal 23 - Tanggal 29"
+                    android:textColor="@color/headings"
+                    android:textSize="13sp"
+                    android:id="@+id/keempattanggal"
+                    android:visibility="visible"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Minggu ke -4"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:id="@+id/keempat"
+                    android:visibility="visible"/>
+                <TextView
+                    android:id="@+id/pembayaran_mempat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="status selesai"
+                    android:textColor="#000000"
+                    android:background="@drawable/aktif"
+                    android:textSize="18sp"
+                    android:visibility="gone"/>
+                <TextView
+                    android:id="@+id/belums_mempat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="belum selesai"
+                    android:textColor="#ffffff"
+                    android:background="@drawable/aktifnon"
+                    android:textSize="18sp"
+                    android:visibility="gone"/>
+
+                <Button
+                    android:id="@+id/update_bayarempat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:hint="Input telah bayar"
+                    android:textColorHint="#ffffff"
+                    android:background="@drawable/aktif"
+                    android:textSize="18sp"
+                    android:layout_gravity="right"
+                    android:visibility="gone"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/grey" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
+
+</ScrollView>

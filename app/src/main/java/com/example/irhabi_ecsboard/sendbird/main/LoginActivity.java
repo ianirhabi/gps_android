@@ -1,7 +1,6 @@
 package com.example.irhabi_ecsboard.sendbird.main;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -76,12 +75,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
 
-// set an exit transition
+        // set an exit transition
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setExitTransition(new Explode());
         }
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+
+        PreferenceUtils.setStatusLogin(LoginActivity.this, "tutup");
         // inside your activity (if you did not enable transitions in your theme)
 
         mLoginLayout = (CoordinatorLayout) findViewById(R.id.layout_login);
@@ -159,6 +160,7 @@ public class LoginActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.READ_PHONE_STATE},
                     PERMISSION_READ_STATE);
         }
+
     }
 
     @OnClick(R.id.regis)
@@ -178,7 +180,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if(PreferenceUtils.getConnected(this)) {
-            connectToSendBird(PreferenceUtils.getUserId(this), PreferenceUtils.getNickname(this), PreferenceUtils.getUserGrup(this));
+            showProgressBar(true);
+            Toast.makeText(getApplicationContext(),"Login otomatis silahkan tunggu", Toast.LENGTH_SHORT).show();
+            Postlogin(PreferenceUtils.getUserId(this),PreferenceUtils.getPassword(this));
         }
     }
 
@@ -273,11 +277,13 @@ public class LoginActivity extends AppCompatActivity {
     // Shows or hides the ProgressBar
     private void showProgressBar(boolean show) {
         if (show) {
-            mProgressBar.show();
+            mProgressBar.setVisibility(View.VISIBLE);
         } else {
-            mProgressBar.hide();
+            mProgressBar.setVisibility(View.GONE);
         }
     }
+
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK ) {
             moveTaskToBack(true);
@@ -302,7 +308,8 @@ public class LoginActivity extends AppCompatActivity {
 
         if (requestCode == PERMISSION_READ_STATE) {
             if (grantResult.length > 0 && grantResult[0] == PackageManager.PERMISSION_GRANTED) {
-
+                Toast.makeText(getApplicationContext(),"Silahkan buka kembali aplikasi gps", Toast.LENGTH_SHORT).show();
+               finish();
             } else {
                 Toast.makeText(getApplicationContext(), "Anda Harus Memberi Izin Aplikasi Untuk Melanjutkan", Toast.LENGTH_SHORT).show();
                 System.exit(0);
@@ -311,48 +318,60 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void Postlogin(String username, String password){
+    public void Postlogin(String username, final String password){
 
        user = new Login(username,password);
        service = new RetrofitInstance();
        router = service.getRetrofitInstanceall().create(Router.class);
-
        Call<Login> call = router.Postlogin(user);
        call.enqueue(new Callback<Login>() {
            @Override
            public void onResponse(Call<com.example.irhabi_ecsboard.sendbird.model.Login> call, Response<com.example.irhabi_ecsboard.sendbird.model.Login> response) {
                if(response.body().getStatus().equals("berhasil")){
-
-                   if(response.body().getUser().getUsergrup().equals("4")){
-                       String userId, userNickname;
-                       sesi = new SessionManager(getApplicationContext());
-                       HashMap<String, String>usersesi = sesi.getUserDetails();
-                       userId = usersesi.get(SessionManager.KEY_USERNAME);
-                       userNickname = usersesi.get(SessionManager.KEY_NAME);
-                       PreferenceUtils.setUserGrup(LoginActivity.this, response.body().getUser().getUsergrup());
-                       PreferenceUtils.setUserId(LoginActivity.this,response.body().getUser().getUsername() );
-                       PreferenceUtils.setNickname(LoginActivity.this, response.body().getUser().getName());
-                       connectToSendBird(response.body().getUser().getUsername(), response.body().getUser().getName(),response.body().getUser().getUsergrup());
-                   }else if(response.body().getUser().getUsergrup().equals("1") ||response.body().getUser().getUsergrup().equals("2") ||
-                            response.body().getUser().getUsergrup().equals("3")){
-                       String userId, userNickname;
-                       sesi = new SessionManager(getApplicationContext());
-                       HashMap<String, String>usersesi = sesi.getUserDetails();
-                       userId = usersesi.get(SessionManager.KEY_USERNAME);
-                       userNickname = usersesi.get(SessionManager.KEY_NAME);
-                       PreferenceUtils.setUserGrup(LoginActivity.this, response.body().getUser().getUsergrup());
-                       PreferenceUtils.setUserId(LoginActivity.this,response.body().getUser().getUsername() );
-                       PreferenceUtils.setNickname(LoginActivity.this, response.body().getUser().getName());
-                       connectToSendBird(response.body().getUser().getUsername(), response.body().getUser().getName(),response.body().getUser().getUsergrup());
-                   }else {
+                   if(response.body().getUser().getStatus().equals("pending")){
                        showProgressBar(false);
-                       Toast.makeText(getApplicationContext(),"Anda Tidak terdaftar",Toast.LENGTH_LONG).show();
+                       Toast.makeText(getApplicationContext(),"Status akun anda belum aktif silahkan menghubungi Admin ",Toast.LENGTH_SHORT).show();
+                   }else {
+
+                       if (response.body().getUser().getUsergrup().equals("4")) {
+                           String userId, userNickname;
+                           sesi = new SessionManager(getApplicationContext());
+                           HashMap<String, String> usersesi = sesi.getUserDetails();
+                           userId = usersesi.get(SessionManager.KEY_USERNAME);
+                           userNickname = usersesi.get(SessionManager.KEY_NAME);
+
+                           PreferenceUtils.setUserGrup(LoginActivity.this, response.body().getUser().getUsergrup());
+                           PreferenceUtils.setUserId(LoginActivity.this, response.body().getUser().getUsername());
+                           PreferenceUtils.setPassword(LoginActivity.this, password);
+                           PreferenceUtils.setNickname(LoginActivity.this, response.body().getUser().getName());
+                           connectToSendBird(response.body().getUser().getUsername(), response.body().getUser().getName(), response.body().getUser().getUsergrup());
+
+                       } else if (response.body().getUser().getUsergrup().equals("1") || response.body().getUser().getUsergrup().equals("2") ||
+                               response.body().getUser().getUsergrup().equals("3")) {
+
+                           String userId, userNickname;
+                           sesi = new SessionManager(getApplicationContext());
+                           HashMap<String, String> usersesi = sesi.getUserDetails();
+                           userId = usersesi.get(SessionManager.KEY_USERNAME);
+                           userNickname = usersesi.get(SessionManager.KEY_NAME);
+                           PreferenceUtils.setUserGrup(LoginActivity.this, response.body().getUser().getUsergrup());
+                           PreferenceUtils.setUserId(LoginActivity.this, response.body().getUser().getUsername());
+                           PreferenceUtils.setNickname(LoginActivity.this, response.body().getUser().getName());
+                           PreferenceUtils.setPassword(LoginActivity.this, password);
+                           connectToSendBird(response.body().getUser().getUsername(), response.body().getUser().getName(), response.body().getUser().getUsergrup());
+
+                       } else {
+                           showProgressBar(false);
+                           Toast.makeText(getApplicationContext(), "Anda Tidak terdaftar", Toast.LENGTH_LONG).show();
+                       }
                    }
 
                }else if(response.body().getStatus() == null){
                    showProgressBar(false);
                    Toast.makeText(getApplicationContext(),"Statusnya null", Toast.LENGTH_LONG).show();
-               }else {
+               }
+               //KETIKA SALAH PASSWORD
+               else {
                    showProgressBar(false);
                    Toast.makeText(getApplicationContext(),"Something wrong", Toast.LENGTH_LONG).show();
                }
@@ -381,14 +400,12 @@ public class LoginActivity extends AppCompatActivity {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this).toBundle());
                 }
-                finish();
             }else {
                 showProgressBar(false);
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this).toBundle());
                 }
-                finish();
             }
         }
         @Override

@@ -17,6 +17,8 @@ public class PreferenceUtils {
     public static final String PREFERENCE_KEY_NOTIFICATIONS_DO_NOT_DISTURB_FROM = "notificationsDoNotDisturbFrom";
     public static final String PREFERENCE_KEY_NOTIFICATIONS_DO_NOT_DISTURB_TO = "notificationsDoNotDisturbTo";
     public static final String PREFERENCE_KEY_GROUP_CHANNEL_DISTINCT = "channelDistinct";
+    public static final  String PREFERENCE_KEY_PASSWORD = "password";
+    public static final String PREFERENCE_KEY_STATUS_LOGIN = "statusLogin";
 
     // Prevent instantiation
     private PreferenceUtils() {
@@ -25,6 +27,15 @@ public class PreferenceUtils {
 
     public static SharedPreferences getSharedPreferences(Context context) {
         return context.getSharedPreferences("sendbird", Context.MODE_PRIVATE);
+    }
+
+    public static void setStatusLogin(Context context, String key) {
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+        editor.putString(PREFERENCE_KEY_STATUS_LOGIN, key).apply();
+    }
+
+    public static String getStatusLogin(Context context) {
+        return getSharedPreferences(context).getString(PREFERENCE_KEY_STATUS_LOGIN, "");
     }
 
     public static void setUserId(Context context, String userId) {
@@ -37,9 +48,9 @@ public class PreferenceUtils {
     }
 
 
-    public static void setUserGrup(Context context, String userId) {
+    public static void setUserGrup(Context context, String usergrup) {
         SharedPreferences.Editor editor = getSharedPreferences(context).edit();
-        editor.putString(PREFERENCE_KEY_USER_ID, userId).apply();
+        editor.putString(PREFERENCE_KEY_USER_GRUP, usergrup).apply();
     }
 
     public static String getUserGrup(Context context) {
@@ -55,6 +66,17 @@ public class PreferenceUtils {
     public static String getNickname(Context context) {
         return getSharedPreferences(context).getString(PREFERENCE_KEY_NICKNAME, "");
     }
+
+    public static void setPassword(Context context, String PASSWORD) {
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+        editor.putString(PREFERENCE_KEY_PASSWORD, PASSWORD).apply();
+    }
+
+    public static String getPassword(Context context) {
+        return getSharedPreferences(context).getString(PREFERENCE_KEY_PASSWORD, "");
+    }
+
+
 
     public static void setProfileUrl(Context context, String profileUrl) {
         SharedPreferences.Editor editor = getSharedPreferences(context).edit();

@@ -1,13 +1,20 @@
 package com.example.irhabi_ecsboard.sendbird.main;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Toast;
+
+import com.example.irhabi_ecsboard.sendbird.anggota.AnggotaActivity;
 import com.sendbird.android.SendBird;
 import com.sendbird.android.SendBirdException;
 import com.example.irhabi_ecsboard.sendbird.R;
@@ -22,6 +29,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+
+        // set an exit transition
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setExitTransition(new Explode());
+        }
         setContentView(R.layout.activity_main);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar_main);
@@ -43,21 +56,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.linear_layout_open_iuran).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, OpenChannelActivity.class);
-//                startActivity(intent);
-                Toast.makeText(getApplicationContext(),"masuk ", Toast.LENGTH_LONG).show();
-            }
-        });
-
         findViewById(R.id.linear_layout_open_iuran_anggota).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, OpenChannelActivity.class);
-//                startActivity(intent);
-                Toast.makeText(getApplicationContext(),"masuk ", Toast.LENGTH_LONG).show();
+                Intent ii = new Intent(MainActivity.this, AnggotaActivity.class);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    startActivity(ii, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                }
             }
         });
 
@@ -116,5 +121,15 @@ public class MainActivity extends AppCompatActivity {
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            moveTaskToBack(true);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

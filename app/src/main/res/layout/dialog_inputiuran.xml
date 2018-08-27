@@ -14,107 +14,162 @@
         android:layout_gravity="center"
         android:orientation="vertical"
         android:paddingLeft="20dp"
-        android:paddingRight="20dp" >
+        android:paddingRight="20dp">
 
         <EditText
-            android:id="@+id/kategory"
+            android:id="@+id/minggu"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:background="@color/white"
-            android:hint="Kategori"
+            android:background="@drawable/dialog"
+            android:hint="minggu ke "
             android:inputType="text"
             android:padding="10dp"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:visibility="gone"/>
 
         <EditText
-            android:id="@+id/kode"
+            android:id="@+id/bulan"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:background="@color/white"
-            android:hint="Kode"
+            android:hint="Bulan"
+            android:background="@drawable/dialog"
             android:inputType="text"
             android:padding="10dp"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:visibility="gone"/>
+        <EditText
+            android:id="@+id/tahun"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/dialog"
+            android:hint="Tahun"
+            android:inputType="text"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/inputst"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/yatidak"
+            android:text="Apakah Anda ingin mengaktifkan akun dari anggota ..."
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <Spinner
+            android:id="@+id/stbayar"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/spiner"
+            android:padding="10dp"
+            android:visibility="gone"/>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <Button
+                android:visibility="gone"
                 android:id="@+id/batal"
-                android:layout_gravity="right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="right"
                 android:layout_marginTop="20dip"
-                android:background="@color/btn_login_bg"
+                android:background="@drawable/buttonmerah"
+                android:drawableTop="@drawable/batal"
                 android:text="Batal"
-                android:textColor="@color/btn_login"
-               />
+                android:fontFamily="sans-serif-light"
+                android:textColor="@color/btn_login" />
 
             <Button
-                android:layout_marginLeft="5dp"
-                android:id="@+id/Submit"
-                android:layout_gravity="right"
+                android:visibility="gone"
+                android:fontFamily="sans-serif-light"
+                android:drawableTop="@drawable/input"
+                android:id="@+id/input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="70dp"
                 android:layout_marginTop="20dip"
-                android:background="@color/btn_login_bg"
-                android:text="Submit"
-                android:textColor="@color/btn_login"/>
-
-            <Button
-                android:id="@+id/Edit"
-                android:layout_gravity="right"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dip"
-                android:background="@color/btn_login_bg"
-                android:text="Edit Category"
-                android:textColor="@color/btn_login"
-                android:visibility="gone"/>
-            <Button
-                android:id="@+id/delete"
-                android:layout_gravity="right"
-                android:layout_marginLeft="10dp"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dip"
-                android:background="@color/btn_login_bg"
-                android:text="Delete"
-                android:textColor="@color/btn_login"
-                android:visibility="gone"/>
-
-            <Button
-                android:id="@+id/lihatdetail"
-                android:layout_gravity="right"
-                android:layout_marginLeft="10dp"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dip"
-                android:background="@color/btn_login_bg"
-                android:text="Lihat Detail Category"
-                android:textColor="@color/btn_login"
-                android:visibility="gone"/>
-
-
+                android:background="@drawable/buttonmerah"
+                android:text="Input Iuran"
+                android:textColor="@color/btn_login" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <Button
+            android:visibility="gone"
+            android:fontFamily="sans-serif-light"
+            android:drawableTop="@drawable/update"
+            android:id="@+id/update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="20dip"
+            android:background="@drawable/buttonmerah"
+            android:text="Update"
+            android:textColor="@color/btn_login" />
+
+        <Button
+            android:visibility="gone"
+            android:fontFamily="sans-serif-light"
+            android:drawableTop="@drawable/detail"
+            android:id="@+id/detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="20dip"
+            android:background="@drawable/buttonmerah"
+            android:text="detail"
+            android:textColor="@color/btn_login" />
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <Button
-                android:id="@+id/batal2"
-                android:layout_width="200dp"
+                android:fontFamily="sans-serif-light"
+                android:id="@+id/tidak"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="right"
                 android:layout_marginTop="20dip"
-                android:background="@color/btn_login_bg"
-                android:text="Batal"
+                android:background="@drawable/buttonmerah"
+                android:text="Tidak"
                 android:textColor="@color/btn_login"
-                android:layout_marginLeft="200dp"
                 android:visibility="gone"/>
+
+            <Button
+                android:fontFamily="sans-serif-light"
+                android:id="@+id/ya"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="20dip"
+                android:background="@drawable/buttonmerah"
+                android:text="Ya"
+                android:textColor="@color/btn_login"
+                android:visibility="gone"/>
+
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
