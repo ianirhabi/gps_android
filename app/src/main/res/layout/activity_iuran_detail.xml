@@ -284,6 +284,18 @@
                     android:textSize="18sp"
                     android:layout_gravity="right"
                     android:visibility="gone"/>
+
+                <Button
+                    android:id="@+id/update_belumbayarsatu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:hint="Input belum bayar"
+                    android:textColorHint="#ffffff"
+                    android:background="@drawable/aktifnon"
+                    android:textSize="18sp"
+                    android:layout_gravity="right"
+                    android:visibility="gone"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -347,6 +359,17 @@
                     android:hint="Input telah bayar"
                     android:textColorHint="#ffffff"
                     android:background="@drawable/aktif"
+                    android:textSize="18sp"
+                    android:layout_gravity="right"
+                    android:visibility="gone"/>
+                <Button
+                    android:id="@+id/update_belumbayardua"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:hint="Input belum bayar"
+                    android:textColorHint="#ffffff"
+                    android:background="@drawable/aktifnon"
                     android:textSize="18sp"
                     android:layout_gravity="right"
                     android:visibility="gone"/>
@@ -416,6 +439,17 @@
                     android:textSize="18sp"
                     android:layout_gravity="right"
                     android:visibility="gone"/>
+                <Button
+                    android:id="@+id/update_belumbayartiga"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:hint="Input belum bayar"
+                    android:textColorHint="#ffffff"
+                    android:background="@drawable/aktifnon"
+                    android:textSize="18sp"
+                    android:layout_gravity="right"
+                    android:visibility="gone"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -479,6 +513,17 @@
                     android:hint="Input telah bayar"
                     android:textColorHint="#ffffff"
                     android:background="@drawable/aktif"
+                    android:textSize="18sp"
+                    android:layout_gravity="right"
+                    android:visibility="gone"/>
+                <Button
+                    android:id="@+id/update_belumbayarempat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:hint="Input belum bayar"
+                    android:textColorHint="#ffffff"
+                    android:background="@drawable/aktifnon"
                     android:textSize="18sp"
                     android:layout_gravity="right"
                     android:visibility="gone"/>

@@ -33,7 +33,9 @@ public class IuranDetail extends AppCompatActivity {
 
     //updatebayar
     private Button up_bsatu, up_bdua,up_btiga,up_bempat,
-                    up_bayarsatu, up_bayardua,up_bayartiga,up_bayarempat;
+                    up_bayarsatu, up_bayardua,up_bayartiga,up_bayarempat,
+                    up_belumbayarsatu, up_belumbayardua, up_belumbayartiga, up_belumbayarempat,
+                    up_belumbyrsatu, up_belumbyrdua, up_belumbyrtiga, up_belumbyrempat;
 
     private TextView name, num, satu, satutujuh, duwa, mduwa,
             tga,ga, pat, ppat, pembayaran_status_m1,pembayaran_status_m2,
@@ -145,6 +147,17 @@ public class IuranDetail extends AppCompatActivity {
 
        up_bayarempat = (Button)findViewById(R.id.update_bayarempat);
        this.up_bempat = up_bayarempat;
+
+       //update belum bayar
+        up_belumbyrsatu = (Button)findViewById(R.id.update_belumbayarsatu);
+        this.up_belumbayarsatu = up_belumbyrsatu;
+        up_belumbyrdua = (Button)findViewById(R.id.update_belumbayardua);
+        this.up_belumbayardua = up_belumbyrdua;
+        up_belumbyrtiga = (Button)findViewById(R.id.update_belumbayartiga);
+        this.up_belumbayartiga = up_belumbyrtiga;
+        up_belumbyrempat = (Button)findViewById(R.id.update_belumbayarempat);
+        this.up_belumbayarempat = up_belumbyrempat;
+
     }
 
     public void showData(){
@@ -273,19 +286,19 @@ public class IuranDetail extends AppCompatActivity {
             if(b.equals("Minggu ke -1")){
                 satu.setVisibility(View.GONE);
                 tuj.setVisibility(View.GONE);
-                getIuran("1",m1_pembayaran_status,blsatu,tuj,up_bsatu,"6");
+                getIuran("1",m1_pembayaran_status,blsatu,tuj,up_bsatu,"6",up_belumbayarsatu);
             }else if(b.equals("Minggu ke -2")) {
                 wa.setVisibility(View.GONE);
                 dwa.setVisibility(View.GONE);
-                getIuran("2",m2_pembayaran_status,bldua,dwa,up_bdua,"13");
+                getIuran("2",m2_pembayaran_status,bldua,dwa,up_bdua,"13", up_belumbayardua);
             }else if(b.equals("Minggu ke -3")){
                 gaa.setVisibility(View.GONE);
                 mga.setVisibility(View.GONE);
-                getIuran("3",m3_pembayaran_status,bltiga,mga,up_btiga,"20");
+                getIuran("3",m3_pembayaran_status,bltiga,mga,up_btiga,"20", up_belumbayartiga);
             }else if(b.equals("Minggu ke -4")){
                 empt.setVisibility(View.GONE);
                 mpatt.setVisibility(View.GONE);
-                getIuran("4",m4_pembayaran_status,blempat,mpatt,up_bempat,"28");
+                getIuran("4",m4_pembayaran_status,blempat,mpatt,up_bempat,"28", up_belumbayarempat);
             }
         }
 
@@ -296,7 +309,8 @@ public class IuranDetail extends AppCompatActivity {
     }
 
     public void getIuran(final String minggu , final TextView st, final TextView BLs,
-                         final TextView tanggal, final Button updatebayar, final String tglmurni){
+                         final TextView tanggal, final Button updatebayar, final String tglmurni,
+                         final Button updateBelumbayar){
 
         service = new RetrofitInstance();
         router = service.getRetrofitInstanceall().create(Router.class);
@@ -323,6 +337,8 @@ public class IuranDetail extends AppCompatActivity {
                         updatebayar.setVisibility(View.GONE);
                         tanggal.setText("Tanggal pembayaran iuran : " + data.get(0).getTanggal());
                         st.setText(data.get(0).getBayar());
+                        updateBelumbayar.setVisibility(View.VISIBLE);
+                        belumBayar(updateBelumbayar, minggu, bulan,th,tglmurni, getId);
                     }
 
                 }else if (response.body().getBelumbayar() == 0){
@@ -358,8 +374,17 @@ public class IuranDetail extends AppCompatActivity {
         });
     }
 
-    public void postupdateBayar(final Button bls,String minggu, String bulan, String tahun, String tanggal){
+    public void belumBayar (final Button dd, final String minggu, final String bulan,
+                             final String tahun, final String tanggal, final int getId){
+        dd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updatebelumbayar(bulan,tahun,getId,minggu,dd);
+            }
+        });
+    }
 
+    public void postupdateBayar(final Button bls,String minggu, String bulan, String tahun, String tanggal){
         Bundle b = getIntent().getExtras();
         final int getId = b.getInt("id");
         final String anggota = b.getString("anggota");
@@ -418,5 +443,21 @@ public class IuranDetail extends AppCompatActivity {
         mpatt.setText("Tanggal 23-Tanggal 29");
         m4_pembayaran_status.setVisibility(View.GONE);
         blempat.setVisibility(View.GONE);
+    }
+
+    public void updatebelumbayar(String bulan,String th,int getId,String minggu, final Button ss){
+        Call<Iuran> call = router.Deleteiuran(bulan,th,getId,minggu);
+        call.enqueue(new Callback<Iuran>() {
+            @Override
+            public void onResponse(Call<Iuran> call, Response<Iuran> response) {
+                Toast.makeText(getApplicationContext(),"Data berhasil di update", Toast.LENGTH_SHORT).show();
+                Iuranpostrefresh(ss);
+            }
+
+            @Override
+            public void onFailure(Call<Iuran> call, Throwable t) {
+                Toast.makeText(getApplicationContext(),"oOps ada yang salah!! :'( ",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

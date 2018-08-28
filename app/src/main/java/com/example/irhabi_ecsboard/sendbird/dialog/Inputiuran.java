@@ -76,8 +76,9 @@ public class Inputiuran {
         final EditText tanggal = (EditText) dialog.findViewById(R.id.minggu);
         final Spinner stbayar = (Spinner) dialog.findViewById(R.id.stbayar);
         final TextView ts  = (TextView) dialog.findViewById(R.id.inputst);
+        final Button admin = (Button)dialog.findViewById(R.id.admin);
         st(ts, anggota);
-        checkSesion(input,batal,update,detail, stbayar, ts, adapter,id, anggota, dialog);
+        checkSesion(input,batal,update,detail, stbayar, ts, adapter,id, anggota, dialog, admin);
         batal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -176,7 +177,7 @@ public class Inputiuran {
     public void checkSesion(final Button input, final Button batal, final Button update,
                             final Button detail, final Spinner st, final TextView lihat,
                             final ArrayAdapter adapter, final int id,
-                            final String anggota, final  Dialog dialog){
+                            final String anggota, final  Dialog dialog, final Button admin){
 
         sesi = new SessionManager(mContext);
         HashMap<String, String> usersesi = sesi.getUserDetails();
@@ -260,6 +261,7 @@ public class Inputiuran {
                     tidakya.setVisibility(View.VISIBLE);
                     ya.setVisibility(View.VISIBLE);
                     tidak.setVisibility(View.VISIBLE);
+                    admin.setVisibility(View.VISIBLE);
                     tidakya.setText("Apakah Anda yakin ingin mengaktifkan akun dari anggota bernama "+ anggota);
                     tidak.setOnClickListener(new View.OnClickListener() {
                        @Override
@@ -270,22 +272,28 @@ public class Inputiuran {
                     ya.setOnClickListener(new View.OnClickListener() {
                        @Override
                        public void onClick(View view) {
-                            postUpdate();
+                            postUpdate("aktif");
                        }
+                    });
+                    admin.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            postUpdate("admin");
+                        }
                     });
                 }
             });
         }
     }
 
-    void postUpdate(){
+    void postUpdate(String status){
         user = new User("","","","","","",imei,
                 "","");
         service = new RetrofitInstance();
 
         router = service.getRetrofitInstanceall().create(Router.class);
 
-        Call<User> call = router.Postregis(user,imei,"aktif");
+        Call<User> call = router.Postregis(user,imei,status);
 
         call.enqueue(new Callback<User>() {
             @Override

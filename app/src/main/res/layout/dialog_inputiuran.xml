@@ -171,5 +171,16 @@
                 android:visibility="gone"/>
 
         </LinearLayout>
+        <Button
+            android:fontFamily="sans-serif-light"
+            android:id="@+id/admin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dip"
+            android:background="@drawable/buttonmerah"
+            android:text="Jadikan sebagai admin"
+            android:textColor="@color/btn_login"
+            android:visibility="gone"/>
     </LinearLayout>
 </LinearLayout>

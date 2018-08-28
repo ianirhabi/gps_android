@@ -14,6 +14,7 @@ import com.example.irhabi_ecsboard.sendbird.model.User;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -40,4 +41,9 @@ public  interface Router {
     Call<ResponseIuran> Getiuran(@Path("bulan") String bulan, @Path("tahun")
             String tahun, @Path("userid")int userid,
                                        @Path("minggu")String minggu);
+
+    @DELETE("iuran/{bulan}/{tahun}/anggota/{userid}/{minggu}")
+    Call<Iuran> Deleteiuran(@Path("bulan") String bulan, @Path("tahun")
+            String tahun, @Path("userid")int userid,
+                                 @Path("minggu")String minggu);
 }
