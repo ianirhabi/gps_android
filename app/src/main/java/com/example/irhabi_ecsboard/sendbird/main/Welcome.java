@@ -1,6 +1,5 @@
 package com.example.irhabi_ecsboard.sendbird.main;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -9,7 +8,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.irhabi_ecsboard.sendbird.R;
 import com.example.irhabi_ecsboard.sendbird.sesi.SessionManager;

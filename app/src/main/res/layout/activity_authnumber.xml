@@ -131,5 +131,22 @@
             android:drawableLeft="@android:drawable/ic_menu_send"
             android:hint="Kirim Kembali Kode"
             android:textColorHint="#000000" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_gravity="center"
+            android:text="Mohon tunggu sebentar...! kode verifikasi akan di sinkronkan secara otomatis jika nomor hp berada pada hp yang di daftar"
+            android:textColor="#ffffff" />
+
+        <android.support.v4.widget.ContentLoadingProgressBar
+            android:id="@+id/progress_bar_verifikasi"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="#d60909"
+            android:layout_gravity="center"
+            android:visibility="visible" />
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

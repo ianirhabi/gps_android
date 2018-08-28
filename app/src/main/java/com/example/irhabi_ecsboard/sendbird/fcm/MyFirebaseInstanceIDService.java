@@ -32,7 +32,6 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         LocalBroadcastManager.getInstance(this).sendBroadcast(registrationComplete);
     }
 
-
     private void sendRegistrationToServer(String token) {
         // TODO: Implement this method to send token to your app server.
         SendBird.registerPushTokenForCurrentUser(token, new SendBird.RegisterPushTokenWithStatusHandler() {

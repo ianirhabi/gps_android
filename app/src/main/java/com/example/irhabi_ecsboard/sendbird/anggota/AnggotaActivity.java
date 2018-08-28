@@ -166,7 +166,7 @@ public class AnggotaActivity extends AppCompatActivity implements AnggotaAdapter
             sesi.createStatus("1");
             iurandialog = new Inputiuran();
             iurandialog.showInput(AnggotaActivity.this, "",
-                    AnggotaActivity.this, user.getId(), user.getName(), adapter, user.getUsername(), user.getImei());
+                    AnggotaActivity.this, user.getId(), user.getName(), adapter, user.getUsername(), user.getUsername());
         }
     }
 

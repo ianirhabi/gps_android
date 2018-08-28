@@ -10,12 +10,14 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -82,6 +84,7 @@ public class Authnumber extends AppCompatActivity {
     private String strphoneType = "";
     private User user;
     private RetrofitInstance retrofit;
+    private ContentLoadingProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +97,10 @@ public class Authnumber extends AppCompatActivity {
         l.setText("Nomor Anda " + getnumber);
 
         mAuth = FirebaseAuth.getInstance();
+
+        // A loading indicator
+        mProgressBar = (ContentLoadingProgressBar) findViewById(R.id.progress_bar_verifikasi);
+
         mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
             public void onVerificationCompleted(PhoneAuthCredential credential) {
@@ -107,7 +114,8 @@ public class Authnumber extends AppCompatActivity {
                 if (e instanceof FirebaseAuthInvalidCredentialsException) {
 
                 } else if (e instanceof FirebaseTooManyRequestsException) {
-                    Snackbar.make(findViewById(android.R.id.content), "Quota exceeded.",
+                    showProgressBar(false);
+                    Snackbar.make(findViewById(android.R.id.content), "Pengiriman kode verifikasi terbatas coba lagi esok hari",
                             Snackbar.LENGTH_SHORT).show();
                 }
             }
@@ -121,6 +129,14 @@ public class Authnumber extends AppCompatActivity {
             }
         };
         startPhoneNumberVerification(getnumber);
+    }
+    // Shows or hides the ProgressBar
+    private void showProgressBar(boolean show) {
+        if (show) {
+            mProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            mProgressBar.setVisibility(View.GONE);
+        }
     }
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {

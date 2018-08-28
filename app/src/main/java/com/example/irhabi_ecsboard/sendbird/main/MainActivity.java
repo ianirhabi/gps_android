@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
 
         // set an exit transition
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Toast.makeText(getApplicationContext(),"Anda Masuk disini", Toast.LENGTH_SHORT).show();
             getWindow().setExitTransition(new Explode());
         }
 

