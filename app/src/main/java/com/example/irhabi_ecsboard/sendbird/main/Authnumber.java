@@ -229,11 +229,11 @@ public class Authnumber extends AppCompatActivity {
         Date jamnya = new Date();
         String jam = dateFormat2.format(jamnya);
         Log.d("masuk sini", "");
-        user = new User(name, username, password, tanggal ,jam, token, imei, "1.2323", "106.77777");
+        user = new User(name, username, password, tanggal ,jam, token, imei, "", "");
         retrofit = new RetrofitInstance();
         Log.d("masuk sini", "");
         Router service = retrofit.getRetrofitInstanceall().create(Router.class);
-        Call<User> call = service.Postregis(user, imei,"pending");
+        Call<User> call = service.Postregis(user, username,"pending");
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, retrofit2.Response<User> response) {

@@ -11,6 +11,7 @@ import android.util.Log;
 import com.example.irhabi_ecsboard.sendbird.model.User;
 import com.example.irhabi_ecsboard.sendbird.service.RetrofitInstance;
 import com.example.irhabi_ecsboard.sendbird.service.Router;
+import com.example.irhabi_ecsboard.sendbird.utils.PreferenceUtils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,7 +33,8 @@ public class UpdatePost extends AppCompatActivity{
                 lont,lat);
         service = new RetrofitInstance();
         router = service.getRetrofitInstanceall().create(Router.class);
-        Call<User> call = router.Postregis(user,imei,"realupdate");
+        String username = PreferenceUtils.getUserId(mContext);
+        Call<User> call = router.Postregis(user,username,"realupdate");
         call.enqueue(new Callback<User>() {
 
             @Override

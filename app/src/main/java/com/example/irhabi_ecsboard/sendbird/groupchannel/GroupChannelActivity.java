@@ -24,7 +24,6 @@ import android.view.View;
 import com.example.irhabi_ecsboard.sendbird.R;
 import com.example.irhabi_ecsboard.sendbird.fcm.Config;
 import com.example.irhabi_ecsboard.sendbird.main.MainActivity;
-import com.example.irhabi_ecsboard.sendbird.openchannel.OpenChannelActivity;
 import com.example.irhabi_ecsboard.sendbird.updatepost.UpdatePost;
 
 import java.text.DateFormat;
