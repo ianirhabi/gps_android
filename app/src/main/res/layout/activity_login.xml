@@ -78,13 +78,10 @@
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/button_login_connect"
             android:text="@string/login_connect"
-            style="@style/Widget.AppCompat.Button.Colored"
-            app:theme="@style/AppTheme.ButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginTop="44dp"
-            android:stateListAnimator="@null"
-            android:background="@drawable/btn_purple">
+            android:background="@drawable/button_merah">
         </android.support.v7.widget.AppCompatButton>
 
         <LinearLayout
