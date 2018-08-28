@@ -1,6 +1,5 @@
 package com.example.irhabi_ecsboard.sendbird.anggota;
 
-import android.app.Activity;
 import android.app.ActivityOptions;
 import android.app.SearchManager;
 import android.content.Context;
@@ -29,7 +28,6 @@ import com.example.irhabi_ecsboard.sendbird.R;
 import com.example.irhabi_ecsboard.sendbird.admin.Admin;
 import com.example.irhabi_ecsboard.sendbird.detailiuran.IuranDetail;
 import com.example.irhabi_ecsboard.sendbird.dialog.Inputiuran;
-import com.example.irhabi_ecsboard.sendbird.main.LoginActivity;
 import com.example.irhabi_ecsboard.sendbird.main.MainActivity;
 import com.example.irhabi_ecsboard.sendbird.model.Anggota;
 import com.example.irhabi_ecsboard.sendbird.model.User;
@@ -69,7 +67,6 @@ public class AnggotaActivity extends AppCompatActivity implements AnggotaAdapter
     }
 
     public void setFloatingButton(){
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -112,14 +109,11 @@ public class AnggotaActivity extends AppCompatActivity implements AnggotaAdapter
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_anggota, menu);
-
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView = (SearchView) menu.findItem(R.id.action_search)
                 .getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
-
-
         //listening to search text query
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -139,7 +133,6 @@ public class AnggotaActivity extends AppCompatActivity implements AnggotaAdapter
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-
         int id = item.getItemId();
         if(id == R.id.action_search){
             return true;
@@ -154,9 +147,7 @@ public class AnggotaActivity extends AppCompatActivity implements AnggotaAdapter
 
     @Override
     public void onAnggotaSelected(User user){
-
         if(status.equals("4")){
-
             Intent i = new Intent(AnggotaActivity.this, IuranDetail.class);
             Bundle ambildata = new Bundle();
             ambildata.putInt("id", user.getId());
@@ -168,7 +159,6 @@ public class AnggotaActivity extends AppCompatActivity implements AnggotaAdapter
             }
 
         }else {
-
             String[] st = {"selesai", "belum selesai"};
             ArrayAdapter adapter = new ArrayAdapter(this,
                     android.R.layout.simple_spinner_dropdown_item, st);
@@ -181,11 +171,8 @@ public class AnggotaActivity extends AppCompatActivity implements AnggotaAdapter
     }
 
     public void getAnggota(){
-
         service = new RetrofitInstance();
-
         router = service.getRetrofitInstanceall().create(Router.class);
-
         Call<Anggota> call = router.Get();
         call.enqueue(new Callback<Anggota>() {
             @Override
@@ -208,12 +195,10 @@ public class AnggotaActivity extends AppCompatActivity implements AnggotaAdapter
     private void generateAnggota(ArrayList<User> anggota) {
         recyclerView = findViewById(R.id.recycler_view_anggota);
         mAdapter = new AnggotaAdapter(AnggotaActivity.this, anggota, this);
-
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new MyDividerItemDecoration(this, DividerItemDecoration.VERTICAL, 36));
-
         recyclerView.setAdapter(mAdapter);
     }
 }
